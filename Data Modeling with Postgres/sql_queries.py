@@ -71,7 +71,7 @@ on conflict (ts) do nothing
 user_table_insert = ("""
 insert into users
 VALUES (%s, %s, %s, %s, %s)
-on conflict (user_id) do nothing
+on conflict (user_id) DO UPDATE SET level=EXCLUDED.level
 """)
 
 song_table_insert = ("""
