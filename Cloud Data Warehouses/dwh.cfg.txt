@@ -2,7 +2,7 @@
 HOST='redshift-cluster.cqk9r0rxge5e.us-west-2.redshift.amazonaws.com'
 DB_NAME='dev'
 DB_USER='awsuser'
-DB_PASSWORD='BSstarter7'
+DB_PASSWORD=''
 DB_PORT=5439
 
 [IAM_ROLE]
