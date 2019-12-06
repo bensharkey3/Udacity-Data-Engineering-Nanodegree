@@ -6,10 +6,11 @@ from sql_queries import *
 
 
 def get_files(filepath):
-    '''
-    This function can be used to create a list with all files in the filepath.
-    Arguements: 
+    '''This function can be used to create a list with all files in the filepath.
+    Arguments: 
         filepath: filepath of the folder containing the files 
+    Returns: 
+        all_files
     '''
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -20,13 +21,13 @@ def get_files(filepath):
 
 
 def process_song_file(cur, filepath):
-    '''
-    This function inserts records into the songs and artists tables.
-    Arguements: 
+    '''This function inserts records into the songs and artists tables.
+    Arguments: 
         filepath: filepath of the folder containing the files 
         cur: the cursor object
+    Returns:
+        none
     '''
-    
     df = pd.read_json(filepath, lines=True)
     
     # insert song record
@@ -39,13 +40,13 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
-    '''
-    This function  writes a log file into the tables.
-    Arguements: 
+    '''This function  writes a log file into the tables.
+    Arguments: 
         filepath: filepath of the folder containing the files 
         cur: the cursor object
+    Returns:
+        none
     '''
-    
     df = pd.read_json(filepath, lines=True)
     
     # filter by NextSong action
@@ -95,13 +96,14 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
-    '''
-    This function processes data from the given filepath,
-    Arguements: 
+    '''This function processes data from the given filepath,
+    Arguments: 
         filepath: filepath of the folder containing the files 
         cur: the cursor object
         conn: the connection object
         func: the function used
+    Returns:
+        none
     '''
     # get all files matching extension from directory 
     all_files = []
@@ -122,9 +124,11 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-    '''
-    This function creates database connection and runs the process_data function for song and log data
-    Arguments: none
+    '''This function creates database connection and runs the process_data function for song and log data
+    Arguments: 
+        none
+    Returns:
+        none
     '''
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
